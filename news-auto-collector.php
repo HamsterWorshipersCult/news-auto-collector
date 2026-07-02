@@ -144,13 +144,11 @@ add_action('admin_init', function () {
 /* ================================
    AUTO CRON (HOURLY)
 ================================ */
-add_action('wp', function () {
+register_activation_hook(__FILE__, function () {
     if (!wp_next_scheduled('nac_hourly_event')) {
         wp_schedule_event(time(), 'hourly', 'nac_hourly_event');
     }
 });
-
-add_action('nac_hourly_event', 'nac_fetch_news');
 
 /* ================================
    SHORTCODE
